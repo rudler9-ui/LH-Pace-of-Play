@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golf Pace Tracker</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 20px; background: #f0f4f0; }
+        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: inline-block; width: 100%; max-width: 400px; }
+        select { padding: 10px; margin: 10px 0; width: 85%; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 1em; }
+        button { background: #2e7d32; color: white; border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 85%; margin-top: 10px; font-size: 1.1em; }
+        #result { margin-top: 20px; font-size: 1.4em; color: #1b5e20; font-weight: bold; }
+        .sub-text { font-size: 0.9em; color: #666; margin-top: 5px; }
+        .label-text { font-weight: bold; display: block; margin-top: 10px; text-align: left; padding-left: 8%; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Laurel Hill Pace Tracker</h2>
+    
+    <span class="label-text">Starting Hole:</span>
+    <select id="startHole">
+        <option value="1">Front 9 (Hole 1)</option>
+        <option value="10">Back 9 (Hole 10)</option>
+    </select>
+
+    <span class="label-text">Select Tee Time:</span>
+    <select id="teeTime">
+        <option value="07:08">07:08 AM</option>
+        <option value="07:18">07:18 AM</option>
+        <option value="07:28">07:28 AM</option>
+        <option value="07:38">07:38 AM</option>
+        <option value="07:48">07:48 AM</option>
+        <option value="07:58">07:58 AM</option>
+        <option value="08:08">08:08 AM</option>
+        <option value="08:18">08:18 AM</option>
+        <option value="08:28">08:28 AM</option>
+        <option value="08:38">08:38 AM</option>
+        <option value="08:48">08:48 AM</option>
+        <option value="08:58">08:58 AM</option>
+        <option value="09:08">09:08 AM</option>
+        <option value="09:18">09:18 AM</option>
+        <option value="09:28">09:28 AM</option>
+        <option value="09:38">09:38 AM</option>
+        <option value="09:48">09:48 AM</option>
+        <option value="09:58">09:58 AM</option>
+        <option value="10:08">10:08 AM</option>
+        <option value="10:18">10:18 AM</option>
+        <option value="10:28">10:28 AM</option>
+        <option value="10:38">10:38 AM</option>
+        <option value="10:48">10:48 AM</option>
+        <option value="10:58">10:58 AM</option>
+        <option value="11:08">11:08 AM</option>
+        <option value="11:18">11:18 AM</option>
+        <option value="11:28">11:28 AM</option>
+        <option value="11:38">11:38 AM</option>
+        <option value="11:48">11:48 AM</option>
+        <option value="11:58">11:58 AM</option>
+        <option value="12:08">12:08 PM</option>
+        <option value="12:18">12:18 PM</option>
+        <option value="12:28">12:28 PM</option>
+        <option value="12:38">12:38 PM</option>
+        <option value="12:48">12:48 PM</option>
+        <option value="12:58">12:58 PM</option>
+        <option value="13:08">01:08 PM</option>
+        <option value="13:18">01:18 PM</option>
+        <option value="13:28">01:28 PM</option>
+        <option value="13:38">01:38 PM</option>
+        <option value="13:48">01:48 PM</option>
+        <option value="13:58">01:58 PM</option>
+        <option value="14:08">02:08 PM</option>
+        <option value="14:18">02:18 PM</option>
+        <option value="14:28">02:28 PM</option>
+        <option value="14:38">02:38 PM</option>
+        <option value="14:48">02:48 PM</option>
+        <option value="14:58">02:58 PM</option>
+        <option value="15:08">03:08 PM</option>
+        <option value="15:18">03:18 PM</option>
+        <option value="15:28">03:28 PM</option>
+        <option value="15:38">03:38 PM</option>
+        <option value="15:48">03:48 PM</option>
+        <option value="15:58">03:58 PM</option>
+        <option value="16:08">04:08 PM</option>
+        <option value="16:18">04:18 PM</option>
+        <option value="16:28">04:28 PM</option>
+        <option value="16:38">04:38 PM</option>
+        <option value="16:48">04:48 PM</option>
+        <option value="16:58">04:58 PM</option>
+        <option value="17:08">05:08 PM</option>
+        <option value="17:18">05:18 PM</option>
+        <option value="17:28">05:28 PM</option>
+        <option value="17:38">05:38 PM</option>
+        <option value="17:48">05:48 PM</option>
+        <option value="17:58">05:58 PM</option>
+        <option value="18:08">06:08 PM</option>
+        <option value="18:18">06:18 PM</option>
+        <option value="18:28">06:28 PM</option>
+        <option value="18:38">06:38 PM</option>
+        <option value="18:48">06:48 PM</option>
+        <option value="18:58">06:58 PM</option>
+        <option value="19:08">07:08 PM</option>
+    </select>
+    
+    <span class="label-text">Target Round Length:</span>
+    <select id="pace">
+        <option value="13.33">4 Hours (Fast)</option>
+        <option value="14">4h 12m (Average)</option>
+        <option value="15" selected>4.5 Hours (Standard)</option>
+        <option value="16">4h 48m (Slow)</option>
+    </select>
+
+    <button onclick="calculateHole()">Check My Position</button>
+
+    <div id="result"></div>
+    <div id="elapsed" class="sub-text"></div>
+</div>
+
+<script>
+function calculateHole() {
+    const teeTimeValue = document.getElementById('teeTime').value;
+    const startHole = parseInt(document.getElementById('startHole').value);
+    const minsPerHole = parseFloat(document.getElementById('pace').value);
+    
+    const now = new Date();
+    const [hours, minutes] = teeTimeValue.split(':');
+    const teeTime = new Date();
+    teeTime.setHours(parseInt(hours), parseInt(minutes), 0);
+
+    let elapsedMins = Math.floor((now - teeTime) / 60000);
+
+    if (elapsedMins < 0) {
+        document.getElementById('result').innerHTML = "You haven't started yet!";
+        document.getElementById('elapsed').innerHTML = "";
+        return;
+    }
+
+    let holesPlayed = Math.floor(elapsedMins / minsPerHole);
+    let currentHole;
+
+    if (holesPlayed >= 18) {
+        document.getElementById('result').innerHTML = "Round Finished! ??";
+        document.getElementById('elapsed').innerHTML = `Total time: ${elapsedMins} mins`;
+        return;
+    }
+
+    if (startHole === 1) {
+        currentHole = holesPlayed + 1;
+    } else {
+        currentHole = 10 + holesPlayed;
+        if (currentHole > 18) {
+            currentHole = currentHole - 18;
+        }
+    }
+    
+    document.getElementById('result').innerHTML = `You should be on Hole #${currentHole}`;
+    document.getElementById('elapsed').innerHTML = `Time elapsed: ${elapsedMins} minutes`;
+}
+</script>
+
+</body>
+</html>
