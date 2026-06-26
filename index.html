@@ -8,6 +8,7 @@
         body { font-family: sans-serif; text-align: center; padding: 20px; background: #f0f4f0; }
         .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: inline-block; width: 100%; max-width: 400px; }
         select { padding: 10px; margin: 10px 0; width: 85%; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 1em; }
+        input[type="text"] { padding: 10px; margin: 10px 0; width: 85%; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 1em; }
         button { background: #2e7d32; color: white; border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 85%; margin-top: 10px; font-size: 1.1em; }
         #result { margin-top: 20px; font-size: 1.4em; color: #1b5e20; font-weight: bold; }
         .sub-text { font-size: 0.9em; color: #666; margin-top: 5px; }
@@ -17,13 +18,14 @@
         .page.active { display: block; }
         .settings-header { display: flex; justify-content: space-between; align-items: center; }
         .back-btn { background: #666; padding: 10px 15px; font-size: 1em; width: auto; margin-top: 0; }
+        .save-btn { background: #2e7d32; }
     </style>
 </head>
 <body>
 
 <div class="card">
     <div id="mainPage" class="page active">
-        <h2>Laurel Hill Pace Tracker</h2>
+        <h2 id="appTitle">Laurel Hill Pace Tracker</h2>
         
         <span class="label-text">Starting Hole:</span>
         <select id="startHole">
@@ -130,11 +132,22 @@
             <button class="back-btn" onclick="goToMain()">Back</button>
         </div>
         
-        <p>Settings content goes here</p>
+        <span class="label-text">Golf Course Name:</span>
+        <input type="text" id="golfCourseName" maxlength="25" placeholder="Enter course name">
+        <div class="sub-text">Max 25 characters</div>
+        
+        <button class="save-btn" onclick="saveSettings()">Save Settings</button>
     </div>
 </div>
 
 <script>
+// Load settings from localStorage on page load
+window.addEventListener('DOMContentLoaded', function() {
+    const savedCourseName = localStorage.getItem('golfCourseName') || 'Laurel Hill';
+    document.getElementById('golfCourseName').value = savedCourseName;
+    updateAppTitle(savedCourseName);
+});
+
 function goToSettings() {
     document.getElementById('mainPage').classList.remove('active');
     document.getElementById('settingsPage').classList.add('active');
@@ -143,6 +156,21 @@ function goToSettings() {
 function goToMain() {
     document.getElementById('settingsPage').classList.remove('active');
     document.getElementById('mainPage').classList.add('active');
+}
+
+function saveSettings() {
+    const courseName = document.getElementById('golfCourseName').value.trim();
+    if (courseName === '') {
+        alert('Please enter a golf course name');
+        return;
+    }
+    localStorage.setItem('golfCourseName', courseName);
+    updateAppTitle(courseName);
+    goToMain();
+}
+
+function updateAppTitle(courseName) {
+    document.getElementById('appTitle').textContent = courseName + ' Pace Tracker';
 }
 
 function calculateHole() {
