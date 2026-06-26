@@ -12,111 +12,139 @@
         #result { margin-top: 20px; font-size: 1.4em; color: #1b5e20; font-weight: bold; }
         .sub-text { font-size: 0.9em; color: #666; margin-top: 5px; }
         .label-text { font-weight: bold; display: block; margin-top: 10px; text-align: left; padding-left: 8%; }
+        .settings-btn { background: #666; width: auto; margin-left: auto; margin-right: auto; display: block; margin-top: 20px; }
+        .page { display: none; }
+        .page.active { display: block; }
+        .settings-header { display: flex; justify-content: space-between; align-items: center; }
+        .back-btn { background: #666; padding: 10px 15px; font-size: 1em; width: auto; margin-top: 0; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h2>Laurel Hill Pace Tracker</h2>
-    
-    <span class="label-text">Starting Hole:</span>
-    <select id="startHole">
-        <option value="1">Front 9 (Hole 1)</option>
-        <option value="10">Back 9 (Hole 10)</option>
-    </select>
+    <div id="mainPage" class="page active">
+        <h2>Laurel Hill Pace Tracker</h2>
+        
+        <span class="label-text">Starting Hole:</span>
+        <select id="startHole">
+            <option value="1">Front 9 (Hole 1)</option>
+            <option value="10">Back 9 (Hole 10)</option>
+        </select>
 
-    <span class="label-text">Select Tee Time:</span>
-    <select id="teeTime">
-        <option value="07:07">07:07 AM</option>
-        <option value="07:17">07:17 AM</option>
-        <option value="07:27">07:27 AM</option>
-        <option value="07:37">07:37 AM</option>
-        <option value="07:47">07:47 AM</option>
-        <option value="07:57">07:57 AM</option>
-        <option value="08:07">08:07 AM</option>
-        <option value="08:17">08:17 AM</option>
-        <option value="08:27">08:27 AM</option>
-        <option value="08:37">08:37 AM</option>
-        <option value="08:47">08:47 AM</option>
-        <option value="08:57">08:57 AM</option>
-        <option value="09:07">09:07 AM</option>
-        <option value="09:17">09:17 AM</option>
-        <option value="09:27">09:27 AM</option>
-        <option value="09:37">09:37 AM</option>
-        <option value="09:47">09:47 AM</option>
-        <option value="09:57">09:57 AM</option>
-        <option value="10:07">10:07 AM</option>
-        <option value="10:17">10:17 AM</option>
-        <option value="10:27">10:27 AM</option>
-        <option value="10:37">10:37 AM</option>
-        <option value="10:47">10:47 AM</option>
-        <option value="10:57">10:57 AM</option>
-        <option value="11:07">11:07 AM</option>
-        <option value="11:17">11:17 AM</option>
-        <option value="11:27">11:27 AM</option>
-        <option value="11:37">11:37 AM</option>
-        <option value="11:47">11:47 AM</option>
-        <option value="11:57">11:57 AM</option>
-        <option value="12:07">12:07 PM</option>
-        <option value="12:17">12:17 PM</option>
-        <option value="12:27">12:27 PM</option>
-        <option value="12:37">12:37 PM</option>
-        <option value="12:47">12:47 PM</option>
-        <option value="12:57">12:57 PM</option>
-        <option value="13:07">01:07 PM</option>
-        <option value="13:17">01:17 PM</option>
-        <option value="13:27">01:27 PM</option>
-        <option value="13:37">01:37 PM</option>
-        <option value="13:47">01:47 PM</option>
-        <option value="13:57">01:57 PM</option>
-        <option value="14:07">02:07 PM</option>
-        <option value="14:17">02:17 PM</option>
-        <option value="14:27">02:27 PM</option>
-        <option value="14:37">02:37 PM</option>
-        <option value="14:47">02:47 PM</option>
-        <option value="14:57">02:57 PM</option>
-        <option value="15:07">03:07 PM</option>
-        <option value="15:17">03:17 PM</option>
-        <option value="15:27">03:27 PM</option>
-        <option value="15:37">03:37 PM</option>
-        <option value="15:47">03:47 PM</option>
-        <option value="15:57">03:57 PM</option>
-        <option value="16:07">04:07 PM</option>
-        <option value="16:17">04:17 PM</option>
-        <option value="16:27">04:27 PM</option>
-        <option value="16:37">04:37 PM</option>
-        <option value="16:47">04:47 PM</option>
-        <option value="16:57">04:57 PM</option>
-        <option value="17:07">05:07 PM</option>
-        <option value="17:17">05:17 PM</option>
-        <option value="17:27">05:27 PM</option>
-        <option value="17:37">05:37 PM</option>
-        <option value="17:47">05:47 PM</option>
-        <option value="17:57">05:57 PM</option>
-        <option value="18:07">06:07 PM</option>
-        <option value="18:17">06:17 PM</option>
-        <option value="18:27">06:27 PM</option>
-        <option value="18:37">06:37 PM</option>
-        <option value="18:47">06:47 PM</option>
-        <option value="18:57">06:57 PM</option>
-        <option value="19:07">07:07 PM</option>
-    </select>
-    
-    <span class="label-text">Target Round Length:</span>
-    <select id="pace">
-        <option value="13.33">4 Hours (Fast)</option>
-        <option value="14">4h 12m (Average)</option>
-        <option value="15" selected>4.5 Hours (Standard)</option>
-        <option value="16">4h 48m (Slow)</option>
-    </select>
+        <span class="label-text">Select Tee Time:</span>
+        <select id="teeTime">
+            <option value="07:07">07:07 AM</option>
+            <option value="07:17">07:17 AM</option>
+            <option value="07:27">07:27 AM</option>
+            <option value="07:37">07:37 AM</option>
+            <option value="07:47">07:47 AM</option>
+            <option value="07:57">07:57 AM</option>
+            <option value="08:07">08:07 AM</option>
+            <option value="08:17">08:17 AM</option>
+            <option value="08:27">08:27 AM</option>
+            <option value="08:37">08:37 AM</option>
+            <option value="08:47">08:47 AM</option>
+            <option value="08:57">08:57 AM</option>
+            <option value="09:07">09:07 AM</option>
+            <option value="09:17">09:17 AM</option>
+            <option value="09:27">09:27 AM</option>
+            <option value="09:37">09:37 AM</option>
+            <option value="09:47">09:47 AM</option>
+            <option value="09:57">09:57 AM</option>
+            <option value="10:07">10:07 AM</option>
+            <option value="10:17">10:17 AM</option>
+            <option value="10:27">10:27 AM</option>
+            <option value="10:37">10:37 AM</option>
+            <option value="10:47">10:47 AM</option>
+            <option value="10:57">10:57 AM</option>
+            <option value="11:07">11:07 AM</option>
+            <option value="11:17">11:17 AM</option>
+            <option value="11:27">11:27 AM</option>
+            <option value="11:37">11:37 AM</option>
+            <option value="11:47">11:47 AM</option>
+            <option value="11:57">11:57 AM</option>
+            <option value="12:07">12:07 PM</option>
+            <option value="12:17">12:17 PM</option>
+            <option value="12:27">12:27 PM</option>
+            <option value="12:37">12:37 PM</option>
+            <option value="12:47">12:47 PM</option>
+            <option value="12:57">12:57 PM</option>
+            <option value="13:07">01:07 PM</option>
+            <option value="13:17">01:17 PM</option>
+            <option value="13:27">01:27 PM</option>
+            <option value="13:37">01:37 PM</option>
+            <option value="13:47">01:47 PM</option>
+            <option value="13:57">01:57 PM</option>
+            <option value="14:07">02:07 PM</option>
+            <option value="14:17">02:17 PM</option>
+            <option value="14:27">02:27 PM</option>
+            <option value="14:37">02:37 PM</option>
+            <option value="14:47">02:47 PM</option>
+            <option value="14:57">02:57 PM</option>
+            <option value="15:07">03:07 PM</option>
+            <option value="15:17">03:17 PM</option>
+            <option value="15:27">03:27 PM</option>
+            <option value="15:37">03:37 PM</option>
+            <option value="15:47">03:47 PM</option>
+            <option value="15:57">03:57 PM</option>
+            <option value="16:07">04:07 PM</option>
+            <option value="16:17">04:17 PM</option>
+            <option value="16:27">04:27 PM</option>
+            <option value="16:37">04:37 PM</option>
+            <option value="16:47">04:47 PM</option>
+            <option value="16:57">04:57 PM</option>
+            <option value="17:07">05:07 PM</option>
+            <option value="17:17">05:17 PM</option>
+            <option value="17:27">05:27 PM</option>
+            <option value="17:37">05:37 PM</option>
+            <option value="17:47">05:47 PM</option>
+            <option value="17:57">05:57 PM</option>
+            <option value="18:07">06:07 PM</option>
+            <option value="18:17">06:17 PM</option>
+            <option value="18:27">06:27 PM</option>
+            <option value="18:37">06:37 PM</option>
+            <option value="18:47">06:47 PM</option>
+            <option value="18:57">06:57 PM</option>
+            <option value="19:07">07:07 PM</option>
+        </select>
+        
+        <span class="label-text">Target Round Length:</span>
+        <select id="pace">
+            <option value="13.33">4 Hours (Fast)</option>
+            <option value="14">4h 12m (Average)</option>
+            <option value="15" selected>4.5 Hours (Standard)</option>
+            <option value="16">4h 48m (Slow)</option>
+        </select>
 
-    <button onclick="calculateHole()">Check My Position</button>
+        <button onclick="calculateHole()">Check My Position</button>
 
-    <div id="result"></div>
-    <div id="elapsed" class="sub-text"></div>
+        <div id="result"></div>
+        <div id="elapsed" class="sub-text"></div>
+        
+        <button class="settings-btn" onclick="goToSettings()">⚙️ Settings</button>
+    </div>
+
+    <div id="settingsPage" class="page">
+        <div class="settings-header">
+            <h2>Settings</h2>
+            <button class="back-btn" onclick="goToMain()">Back</button>
+        </div>
+        
+        <p>Settings content goes here</p>
+    </div>
 </div>
 
 <script>
+function goToSettings() {
+    document.getElementById('mainPage').classList.remove('active');
+    document.getElementById('settingsPage').classList.add('active');
+}
+
+function goToMain() {
+    document.getElementById('settingsPage').classList.remove('active');
+    document.getElementById('mainPage').classList.add('active');
+}
+
 function calculateHole() {
     const teeTimeValue = document.getElementById('teeTime').value;
     const startHole = parseInt(document.getElementById('startHole').value);
