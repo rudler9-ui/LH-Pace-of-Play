@@ -35,79 +35,7 @@
 
         <span class="label-text">Select Tee Time:</span>
         <select id="teeTime">
-            <option value="07:07">07:07 AM</option>
-            <option value="07:17">07:17 AM</option>
-            <option value="07:27">07:27 AM</option>
-            <option value="07:37">07:37 AM</option>
-            <option value="07:47">07:47 AM</option>
-            <option value="07:57">07:57 AM</option>
-            <option value="08:07">08:07 AM</option>
-            <option value="08:17">08:17 AM</option>
-            <option value="08:27">08:27 AM</option>
-            <option value="08:37">08:37 AM</option>
-            <option value="08:47">08:47 AM</option>
-            <option value="08:57">08:57 AM</option>
-            <option value="09:07">09:07 AM</option>
-            <option value="09:17">09:17 AM</option>
-            <option value="09:27">09:27 AM</option>
-            <option value="09:37">09:37 AM</option>
-            <option value="09:47">09:47 AM</option>
-            <option value="09:57">09:57 AM</option>
-            <option value="10:07">10:07 AM</option>
-            <option value="10:17">10:17 AM</option>
-            <option value="10:27">10:27 AM</option>
-            <option value="10:37">10:37 AM</option>
-            <option value="10:47">10:47 AM</option>
-            <option value="10:57">10:57 AM</option>
-            <option value="11:07">11:07 AM</option>
-            <option value="11:17">11:17 AM</option>
-            <option value="11:27">11:27 AM</option>
-            <option value="11:37">11:37 AM</option>
-            <option value="11:47">11:47 AM</option>
-            <option value="11:57">11:57 AM</option>
-            <option value="12:07">12:07 PM</option>
-            <option value="12:17">12:17 PM</option>
-            <option value="12:27">12:27 PM</option>
-            <option value="12:37">12:37 PM</option>
-            <option value="12:47">12:47 PM</option>
-            <option value="12:57">12:57 PM</option>
-            <option value="13:07">01:07 PM</option>
-            <option value="13:17">01:17 PM</option>
-            <option value="13:27">01:27 PM</option>
-            <option value="13:37">01:37 PM</option>
-            <option value="13:47">01:47 PM</option>
-            <option value="13:57">01:57 PM</option>
-            <option value="14:07">02:07 PM</option>
-            <option value="14:17">02:17 PM</option>
-            <option value="14:27">02:27 PM</option>
-            <option value="14:37">02:37 PM</option>
-            <option value="14:47">02:47 PM</option>
-            <option value="14:57">02:57 PM</option>
-            <option value="15:07">03:07 PM</option>
-            <option value="15:17">03:17 PM</option>
-            <option value="15:27">03:27 PM</option>
-            <option value="15:37">03:37 PM</option>
-            <option value="15:47">03:47 PM</option>
-            <option value="15:57">03:57 PM</option>
-            <option value="16:07">04:07 PM</option>
-            <option value="16:17">04:17 PM</option>
-            <option value="16:27">04:27 PM</option>
-            <option value="16:37">04:37 PM</option>
-            <option value="16:47">04:47 PM</option>
-            <option value="16:57">04:57 PM</option>
-            <option value="17:07">05:07 PM</option>
-            <option value="17:17">05:17 PM</option>
-            <option value="17:27">05:27 PM</option>
-            <option value="17:37">05:37 PM</option>
-            <option value="17:47">05:47 PM</option>
-            <option value="17:57">05:57 PM</option>
-            <option value="18:07">06:07 PM</option>
-            <option value="18:17">06:17 PM</option>
-            <option value="18:27">06:27 PM</option>
-            <option value="18:37">06:37 PM</option>
-            <option value="18:47">06:47 PM</option>
-            <option value="18:57">06:57 PM</option>
-            <option value="19:07">07:07 PM</option>
+            <!-- This will be populated dynamically -->
         </select>
         
         <span class="label-text">Target Round Length:</span>
@@ -135,6 +63,20 @@
         <span class="label-text">Golf Course Name:</span>
         <input type="text" id="golfCourseName" maxlength="25" placeholder="Enter course name">
         <div class="sub-text">Max 25 characters</div>
+
+        <span class="label-text">Tee Time Minute Offset (0-9):</span>
+        <select id="minuteOffset">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7" selected>7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+        </select>
         
         <button class="save-btn" onclick="saveSettings()">Save Settings</button>
     </div>
@@ -144,8 +86,12 @@
 // Load settings from localStorage on page load
 window.addEventListener('DOMContentLoaded', function() {
     const savedCourseName = localStorage.getItem('golfCourseName') || 'Laurel Hill';
+    const savedOffset = localStorage.getItem('minuteOffset') || '7';
+    
     document.getElementById('golfCourseName').value = savedCourseName;
+    document.getElementById('minuteOffset').value = savedOffset;
     updateAppTitle(savedCourseName);
+    generateTeeTimeOptions(parseInt(savedOffset));
 });
 
 function goToSettings() {
@@ -160,17 +106,51 @@ function goToMain() {
 
 function saveSettings() {
     const courseName = document.getElementById('golfCourseName').value.trim();
+    const offset = document.getElementById('minuteOffset').value;
+    
     if (courseName === '') {
         alert('Please enter a golf course name');
         return;
     }
+    
     localStorage.setItem('golfCourseName', courseName);
+    localStorage.setItem('minuteOffset', offset);
     updateAppTitle(courseName);
+    generateTeeTimeOptions(parseInt(offset));
     goToMain();
 }
 
 function updateAppTitle(courseName) {
     document.getElementById('appTitle').textContent = courseName + ' Pace Tracker';
+}
+
+function generateTeeTimeOptions(minuteOffset) {
+    const teeTimeSelect = document.getElementById('teeTime');
+    teeTimeSelect.innerHTML = '';
+    
+    const startHour = 7;
+    const endHour = 19;
+    
+    let currentHour = startHour;
+    let currentMinute = minuteOffset;
+    
+    while (currentHour < endHour || (currentHour === endHour && currentMinute === 0)) {
+        const displayHour = currentHour > 12 ? currentHour - 12 : currentHour;
+        const period = currentHour >= 12 ? 'PM' : 'AM';
+        const timeValue = `${String(currentHour).padStart(2, '0')}:${String(currentMinute).padStart(2, '0')}`;
+        const timeDisplay = `${String(displayHour).padStart(2, '0')}:${String(currentMinute).padStart(2, '0')} ${period}`;
+        
+        const option = document.createElement('option');
+        option.value = timeValue;
+        option.text = timeDisplay;
+        teeTimeSelect.appendChild(option);
+        
+        currentMinute += 10;
+        if (currentMinute >= 60) {
+            currentMinute -= 60;
+            currentHour += 1;
+        }
+    }
 }
 
 function calculateHole() {
